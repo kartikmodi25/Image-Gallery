@@ -1,0 +1,9 @@
+body {
+    background-color: #343a40; /* Set the background color for the entire body */
+    min-height: 100vh; /* Ensure body takes up the full viewport height */
+}
+.row{
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

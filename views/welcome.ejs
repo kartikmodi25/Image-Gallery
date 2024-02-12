@@ -1,21 +1,32 @@
 <% layout('../layouts/boilerplate')%>
-    <h1>Welcome <%= dbUser.name %></h1>
-
-    <div class="card" style="width: 18rem;">
-        <img src="<%= dbUser.imageURL %>" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title"><%= dbUser.profileType %></h5>
-          <p class="card-text"><%= dbUser.bio %></p>
+<div class="container-fluid bg-dark d-flex justify-content-center align-items-center vh-100">
+    <div class="row">
+        <div class="col-md-6 bg-primary p-4">
+            <h1 class="text-center mb-4">Welcome <%= dbUser.name %></h1>
+            <div class="d-flex justify-content-center mb-4">
+                <img src="<%= dbUser.imageURL %>" class="img-fluid" alt="...">
+            </div>
+            <div class="d-flex flex-column align-items-center bg-dark rounded border border-dark p-4 text-white">
+                <h5 class="mb-3">
+                    Profession: <%= dbUser.profileType %>
+                </h5>
+                <p class="mb-3">
+                    Bio: <%= dbUser.bio %>
+                </p>
+                <p class="mb-3">
+                    Skill1: <%= dbUser.skill1 %>
+                </p>
+                <p class="mb-3">
+                    Skill2: <%= dbUser.skill2 %>
+                </p>
+                <p class="mb-3">
+                    Skill3: <%= dbUser.skill3 %>
+                </p>
+                <div class="d-flex">
+                    <a href="/edit/<%=dbUser._id%>/edit" class="btn btn-success me-3 mx-3">Edit Profile</a>
+                    <a href="/" class="btn btn-secondary">Log Out</a>
+                </div>
+            </div>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item"><%= dbUser.skill1 %></li>
-          <li class="list-group-item"><%= dbUser.skill2 %></li>
-          <li class="list-group-item"><%= dbUser.skill3 %></li>
-        </ul>
-        <div class="card-body">
-            <form action="/edit/<%=dbUser._id%>/edit">
-                <button class="btn btn-danger">Edit Profile</button>
-            </form>
-          <a href="/" class="card-link">Log Out</a>
-        </div>
-      </div>
+    </div>
+</div>

@@ -1,9 +1,15 @@
 <% layout('../layouts/boilerplate')%>
-<h1>Login Page</h1>
-    <form action="/login" method="POST">
-        <label class="form-label" for="email">Email</label>
-        <input class="form-control" type="text" id="email" name="user[email]">
-        <label class="form-label" for="password">Password</label>
-        <input class="form-control" type="text" id="password" name="user[password]">
-        <button class="btn btn-success">Login</button>
-    </form>
+    <div class="container-fluid bg-dark">
+        <div class="row">
+            <div class="col-md-6 bg-primary p-4">
+                <h1 class="text-dark">Login Page</h1>
+                <form action="/login" method="POST">
+                    <label class="form-label text-dark" for="email">Email</label>
+                    <input class="form-control" type="text" id="email" name="user[email]" placeholder="abc@gmail.com" required>
+                    <label class="form-label text-dark" for="password">Password</label>
+                    <input class="form-control" type="text" id="password" name="user[password]" placeholder="password" required>
+                    <button class="btn btn-success mt-3">Login</button> 
+                </form>
+            </div>
+        </div>
+    </div>

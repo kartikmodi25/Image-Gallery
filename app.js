@@ -5,7 +5,7 @@ const path = require('path');
 const ejsMate = require('ejs-mate');
 const User = require('./models/user');
 const methodOverride = require('method-override');
-
+const UserData = require('./models/userData')
 const app = express();
 
 mongoose.connect('mongodb://127.0.0.1:27017/login-db');
@@ -33,35 +33,62 @@ async function authChecker(req, res, next) {
     }
 }
 
-app.get('/login' , (req, res)=>{
+app.get('/login', (req, res) => {
     res.render('login')
 })
-app.get('/register', (req, res)=>{
+app.get('/register', (req, res) => {
     res.render('register')
 })
-app.get('/welcome', (req, res)=>{
-    res.render('welcome')
+
+app.get('/welcome/:id', async (req, res) => {
+    const dbUser = await UserData.findById(req.params.id)
+    res.render('welcome', { dbUser })
 })
-app.get('/admin', async (req, res)=>{
+app.get('/edit/:id/edit', async (req, res) => {
+    const userData = await UserData.findById(req.params.id)
+    res.render('edit', { userData });
+})
+app.put('/edit/:id', async (req, res) => {
+    const { id } = req.params;
+    const userData = await UserData.findByIdAndUpdate(id, { ...req.body.userData });
+    res.redirect(`/welcome/${userData._id}`)
+});
+
+app.get('/admin', async (req, res) => {
     const users = await User.find({});
-    res.render('admin', {users})
+    res.render('admin', { users })
 })
-app.post('/register', async (req, res)=>{
+app.post('/register', async (req, res) => {
     const user = new User(req.body.user);
     await user.save();
-    res.redirect('/welcome')
+    const userData = new UserData({
+        _id: user._id,
+        name: user.email,
+        imageURL: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
+        profileType: "N/A",
+        bio: "N/A",
+        skill1: "N/A",
+        skill2: "N/A",
+        skill3: "N/A",
+    })
+    await userData.save();
+    res.redirect(`/welcome/${user._id}`)
 })
-app.post('/login', authChecker, async (req, res)=>{
+app.post('/login', authChecker, async (req, res) => {
     const dbUser = await User.findOne({ ...req.body.user });
-    if(dbUser.permission === "admin"){
-        res.redirect('/admin')
+    if (dbUser.permission === "admin") {
+        res.redirect('/admin');
+    } else {
+
+        res.redirect(`/welcome/${dbUser._id}`);
     }
-    else{
-        res.redirect('/welcome')
-    }
-    
+});
+app.delete('/admin/:id', async (req, res) => {
+    const { id } = req.params;
+    await User.findByIdAndDelete(id);
+    res.redirect('/admin');
 })
-app.get('/', (req, res)=>{
+app.get('/', (req, res) => {
     res.render('home')
 })
 app.listen(3000, () => {

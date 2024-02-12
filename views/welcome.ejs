@@ -1,2 +1,21 @@
 <% layout('../layouts/boilerplate')%>
-<h1>Welcome</h1>
+    <h1>Welcome <%= dbUser.name %></h1>
+
+    <div class="card" style="width: 18rem;">
+        <img src="<%= dbUser.imageURL %>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%= dbUser.profileType %></h5>
+          <p class="card-text"><%= dbUser.bio %></p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><%= dbUser.skill1 %></li>
+          <li class="list-group-item"><%= dbUser.skill2 %></li>
+          <li class="list-group-item"><%= dbUser.skill3 %></li>
+        </ul>
+        <div class="card-body">
+            <form action="/edit/<%=dbUser._id%>/edit">
+                <button class="btn btn-danger">Edit Profile</button>
+            </form>
+          <a href="/" class="card-link">Log Out</a>
+        </div>
+      </div>

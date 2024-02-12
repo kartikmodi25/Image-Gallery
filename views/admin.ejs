@@ -7,6 +7,7 @@
           <th scope="col">email</th>
           <th scope="col">password</th>
           <th scope="col">permission</th>
+          <th scope="col">Delete User</th>
         </tr>
       </thead>
 
@@ -17,12 +18,19 @@
             <td><%= user.email %></td>
             <td><%= user.password %></td>
             <td><%= user.permission %></td>
+            <td>
+                <form action="/admin/<%=user._id%>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </td>
           </tr>    
         </tbody>    
         <% }%>
     </table>
 
-
+    <form action="/" method="GET">
+        <button>Log Out</button>
+    </form>
 
     
    

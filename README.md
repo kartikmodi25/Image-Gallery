@@ -1,1 +1,1 @@
-User Management Portal
+Image Gallery Portal

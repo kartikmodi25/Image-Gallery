@@ -5,7 +5,8 @@ const path = require('path');
 const ejsMate = require('ejs-mate');
 const User = require('./models/user');
 const methodOverride = require('method-override');
-const UserData = require('./models/userData')
+const UserData = require('./models/userData');
+const ImageData = require('./models/imageData');
 const app = express();
 
 mongoose.connect('mongodb://127.0.0.1:27017/login-db');
@@ -51,11 +52,28 @@ app.get('/welcome/:id', async (req, res) => {
     const dbUser = await UserData.findById(req.params.id)
     res.render('welcome', { dbUser })
 })
-app.get('/edit/:id/edit', async (req, res) => {
+app.get('/welcome/:id/edit', async (req, res) => {
     const userData = await UserData.findById(req.params.id)
     res.render('edit', { userData });
 })
-app.put('/edit/:id', async (req, res) => {
+app.get('/welcome/:id/gallery', async (req, res) => {
+    const userData = await UserData.findById(req.params.id)
+    const userImages = await ImageData.find({userId: req.params.id})
+    res.render('gallery', { userData, userImages});
+})
+app.get('/welcome/:id/gallery/add', async (req, res) => {
+    const userData = await UserData.findById(req.params.id)
+    res.render('addImage', { userData });
+})
+app.post('/welcome/:id/gallery/add', async (req, res) => {
+    const newImage = new ImageData(req.body.ImageData);
+    newImage.userId = req.params.id
+    await newImage.save();
+    const userImages = await ImageData.find({userId: req.params.id})
+    const userData = await UserData.findById(req.params.id)
+    res.redirect(`/welcome/${userData._id}/gallery`)
+})
+app.put('/welcome/:id/edit', async (req, res) => {
     const { id } = req.params;
     const userData = await UserData.findByIdAndUpdate(id, { ...req.body.userData });
     res.redirect(`/welcome/${userData._id}`)

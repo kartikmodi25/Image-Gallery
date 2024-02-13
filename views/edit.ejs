@@ -5,7 +5,7 @@
                 
                 <div class="col-6">
                     <h1 class="text-center">Edit Profile</h1>
-                    <form action="/edit/<%=userData._id%>?_method=PUT" method="POST">
+                    <form action="/welcome/<%=userData._id%>/edit?_method=PUT" method="POST">
                         <div class="mb-3">
                             <label class="form-label" for="title">Name</label>
                             <input class="form-control" type="text" id="title" name="userData[name]"
@@ -45,7 +45,7 @@
                             <button class="btn btn-success">Update Profile</button>
                         </div>
                     </form>
-                    <a href="/welcome/<%= userData._id%>">Back To Profile</a>
+                    <a href="/welcome/<%= userData._id%>" class="text-white">Back To Profile</a>
                 </div>
             </div>
 

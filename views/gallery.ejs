@@ -1,0 +1,28 @@
+<% layout('../layouts/boilerplate')%>
+<!-- <div>
+    <h1>Welcome To Gallery</h1>
+    <a href="/welcome/<%= userData._id%>/gallery/add">Add New Image</a>
+</div> -->
+<div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Image Gallery</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <a href="/welcome/<%= userData._id%>/gallery/add">Add New Image</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <% for (let image of userImages) { %>
+        <div class="row justify-content-center align-items-center mb-3" style="height: 200px;">
+            <div class="col-6 text-center">
+                <img src="<%= image.imageURL %>" alt="" class="gallery-img img-fluid">
+            </div>
+        </div>
+        <% } %>
+    </div>
+</div>
+
+
+
+    

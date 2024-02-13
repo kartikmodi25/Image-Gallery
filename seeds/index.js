@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('../models/user');
 const UserData = require('../models/userData');
+const ImageData = require('../models/imageData')
 mongoose.connect('mongodb://localhost:27017/login-db', {});
 
 const db = mongoose.connection;
@@ -13,6 +14,7 @@ db.once("open", () => {
 const seedDB = async () => {
     await User.deleteMany({});
     await UserData.deleteMany({})
+    await ImageData.deleteMany({})
     const user = new User({
         email: "admin@admin.com",
         password: "hardpassword",

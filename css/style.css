@@ -7,3 +7,7 @@ body {
     align-items: center;
     height: 100vh;
 }
+.gallery-img{
+    height: 200px;
+    width: 200px;
+}

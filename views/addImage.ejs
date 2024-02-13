@@ -1,0 +1,6 @@
+<% layout('../layouts/boilerplate')%>
+<form action="/welcome/<%= userData._id%>/gallery/add" method="POST">
+    <label class="form-label text-white" for="url">Image URL</label>
+    <input class="form-control" type="text" id="url" name="ImageData[imageURL]"required>
+    <button class="btn btn-success mt-3">Add Image</button> 
+</form>

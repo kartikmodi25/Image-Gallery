@@ -9,6 +9,10 @@ const app = express();
 const adminRoutes = require('./routes/admin')
 const welcomeRoutes = require('./routes/welcome')
 const authRoutes = require('./routes/auth')
+const session = require('express-session')
+const flash = require('connect-flash');
+const passport = require('passport')
+const LocalStrategy = require('passport-local')
 
 mongoose.connect('mongodb://127.0.0.1:27017/login-db');
 db.on("error", console.error.bind(console, "connection error:"));
@@ -23,9 +27,37 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')))
 
+const sessionConfig = {
+    secret: 'thisshouldbeabettersecret!',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
+}
+
+app.use(session(sessionConfig))
+app.use(flash());
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use(new LocalStrategy(User.authenticate()))
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
+app.use((req, res, next) => {
+    console.log(req.session)
+    res.locals.currentUser = req.user;
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+})
+
+
 app.use('/admin', adminRoutes)
 app.use('/welcome', welcomeRoutes)
-app.use('/', authRoutes)
+app.use('', authRoutes)
 
 app.get('/', (req, res) => {
     res.render('home')

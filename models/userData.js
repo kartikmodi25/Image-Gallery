@@ -3,12 +3,13 @@ const Schema = mongoose.Schema;
 const Image = require('./imageData')
 const UserData = new Schema({
     name: String,
-    imageURL: String,
-    profileType: String,
-    bio: String,
-    skill1: String,
-    skill2: String,
-    skill3: String,
+    imageURL: {type: String, default: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80"},
+    profileType: {type: String, default: "N/A"},
+    bio: {type: String, default: "N/A"},
+    skill1: {type: String, default: "N/A"},
+    skill2: {type: String, default: "N/A"},
+    skill3: {type: String, default: "N/A"},
+    email: String,
     image: [
         {
             type: Schema.Types.ObjectId,

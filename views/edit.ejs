@@ -5,36 +5,36 @@
                 
                 <div class="col-6">
                     <h1 class="text-center">Edit Profile</h1>
-                    <form action="/welcome/<%=userData._id%>/edit?_method=PUT" method="POST">
+                    <form action="/welcome/<%=userData._id%>/edit?_method=PUT" method="POST" novalidate class="validated-form">
                         <div class="mb-3">
                             <label class="form-label" for="title">Name</label>
                             <input class="form-control" type="text" id="title" name="userData[name]"
-                                value="<%=userData.name %>">
+                                value="<%=userData.name %>" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="title">Image URL</label>
                             <input class="form-control" type="text" id="title" name="userData[imageURL]"
-                                value="<%=userData.imageURL %>">
+                                value="<%=userData.imageURL %>" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="title">Profile Type</label>
                             <input class="form-control" type="text" id="title" name="userData[profileType]"
-                                value="<%=userData.profileType %>">
+                                value="<%=userData.profileType %>" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="title">Bio</label>
                             <input class="form-control" type="text" id="title" name="userData[bio]"
-                                value="<%=userData.bio %>">
+                                value="<%=userData.bio %>" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="title">Skill1</label>
                             <input class="form-control" type="text" id="title" name="userData[skill1]"
-                                value="<%=userData.skill1 %>">
+                                value="<%=userData.skill1 %>" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="title">Skill2</label>
                             <input class="form-control" type="text" id="title" name="userData[skill2]"
-                                value="<%=userData.skill2 %>">
+                                value="<%=userData.skill2 %>" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="title">Skill3</label>

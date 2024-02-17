@@ -1,16 +1,27 @@
 <% layout('../layouts/boilerplate')%>
-
-<div class="container-fluid bg-dark">
-    <div class="row ">
-        <div class="col-md-6 bg-primary p-4">
-            <h1 class="text-dark">Register Page</h1>
-            <form action="/register" method="POST">
-                <label class="form-label text-dark" for="email">Email</label>
-                <input class="form-control" type="text" id="email" name="user[email]" placeholder="abc@gmail.com" required>
-                <label class="form-label text-dark" for="password">Password</label>
-                <input class="form-control" type="text" id="password" name="user[password]" placeholder="password" required>
-                <button class="btn btn-success mt-3">Register</button> 
-            </form>
+    <div class="container-fluid bg-dark">
+        <div class="row">
+            <div class="col-md-6 bg-primary p-4">
+                <h1 class="text-dark">Register Page</h1>
+                <form action="/register" method="POST" novalidate class="validated-form">
+                    <div class="mb-3">
+                        <label class="form-label text-dark" for="email">Email</label>
+                        <input class="form-control" type="text" id="email" name="user[email]"
+                            placeholder="abc@gmail.com" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-dark" for="password">Password</label>
+                        <input class="form-control" type="password" id="password" name="user[password]"
+                            placeholder="password" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <button class="btn btn-success ">Register</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>

@@ -20,13 +20,7 @@ app.set('views', path.join(__dirname, 'views'))
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
-app.use('/css', express.static(__dirname + '/css', {
-    setHeaders: (res, path, stat) => {
-        if (path.endsWith('.css')) {
-            res.setHeader('Content-Type', 'text/css');
-        }
-    }
-}));
+app.use(express.static(path.join(__dirname, 'public')))
 
 async function authChecker(req, res, next) {
     try {

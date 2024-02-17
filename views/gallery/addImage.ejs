@@ -1,4 +1,4 @@
-<% layout('../layouts/boilerplate')%>
+<% layout('/layouts/boilerplate')%>
 <form action="/welcome/<%= userData._id%>/gallery/add" method="POST" novalidate class="validated-form">
     <label class="form-label text-white" for="url">Image URL</label>
     <input class="form-control" type="text" id="url" name="ImageData[imageURL]"required>

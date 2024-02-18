@@ -7,8 +7,8 @@ const User = require('./models/user');
 const methodOverride = require('method-override');
 const app = express();
 const adminRoutes = require('./routes/admin')
-const welcomeRoutes = require('./routes/welcome')
-const authRoutes = require('./routes/user')
+const welcomeRoutes = require('./routes/user')
+const authRoutes = require('./routes/login')
 const session = require('express-session')
 const flash = require('connect-flash');
 const passport = require('passport')
@@ -67,7 +67,7 @@ app.get('/', (req, res) => {
 })
 app.get('/welcome', catchAsync(async (req, res) => {
     const images = await Image.find({});
-    res.render('gallery/index', { images })
+    res.render('gallery/home', { images })
 }))
 app.use((err, req, res, next) => {
     const { statusCode = 500 } = err;

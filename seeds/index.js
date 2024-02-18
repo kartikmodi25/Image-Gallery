@@ -12,15 +12,8 @@ db.once("open", () => {
 });
 
 const seedDB = async () => {
-    await User.deleteMany({});
     await UserData.deleteMany({})
     await ImageData.deleteMany({})
-    const user = new User({
-        email: "admin@admin.com",
-        password: "hardpassword",
-        permission: "super_admin"
-    })
-    await user.save();
 }
 
 seedDB().then(() => {

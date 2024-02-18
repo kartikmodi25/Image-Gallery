@@ -1,13 +1,5 @@
-body {
-    background-color: #343a40; /* Set the background color for the entire body */
-    min-height: 100vh; /* Ensure body takes up the full viewport height */
-}
-.row{
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-.gallery-img{
-    height: 200px;
-    width: 200px;
+.standardized-image {
+    width: 300px; /* Adjust as needed */
+    height: 200px; /* Adjust as needed */
+    object-fit: cover; /* Ensures the image fills the container without distortion */
 }

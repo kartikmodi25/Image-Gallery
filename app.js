@@ -8,11 +8,13 @@ const methodOverride = require('method-override');
 const app = express();
 const adminRoutes = require('./routes/admin')
 const welcomeRoutes = require('./routes/welcome')
-const authRoutes = require('./routes/auth')
+const authRoutes = require('./routes/user')
 const session = require('express-session')
 const flash = require('connect-flash');
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
+const Image = require('./models/imageData');
+const catchAsync = require('./utils/catchAsync')
 
 mongoose.connect('mongodb://127.0.0.1:27017/login-db');
 db.on("error", console.error.bind(console, "connection error:"));
@@ -47,10 +49,11 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
 app.use((req, res, next) => {
-    console.log(req.session)
     res.locals.currentUser = req.user;
+    // res.locals.userId = req.user._id
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
+
     next();
 })
 
@@ -62,6 +65,10 @@ app.use('', authRoutes)
 app.get('/', (req, res) => {
     res.render('home')
 })
+app.get('/welcome', catchAsync(async (req, res) => {
+    const images = await Image.find({});
+    res.render('gallery/index', { images })
+}))
 app.use((err, req, res, next) => {
     const { statusCode = 500 } = err;
     if (!err.message) err.message = "Oh No! Something Went Wrong!!!!"

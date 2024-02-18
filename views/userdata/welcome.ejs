@@ -1,5 +1,32 @@
 <% layout('/layouts/boilerplate')%>
-<div class="container-fluid bg-dark d-flex justify-content-center align-items-center vh-100">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 class="text-center mb-4">Welcome <%= dbUser.name %></h1>
+            <div class="text-center mb-4">
+                <img src="<%= dbUser.imageURL %>" class="img-fluid rounded-circle" alt="Profile Image">
+            </div>
+            <div class="text-center mb-4">
+                <h5 class="mb-1">Profession:</h5>
+                <p><%= dbUser.profileType %></p>
+            </div>
+            <div class="text-center mb-4">
+                <h5 class="mb-1">Bio:</h5>
+                <p><%= dbUser.bio %></p>
+            </div>
+            <div class="text-center mb-4">
+                <h5 class="mb-1">Skills:</h5>
+                <ul class="list-unstyled">
+                    <li><%= dbUser.skill1 %></li>
+                    <li><%= dbUser.skill2 %></li>
+                    <!-- Add more skills as needed -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- <div class="container-fluid bg-dark d-flex justify-content-center align-items-center vh-100">
     <div class="row">
         <div class="col-md-6 bg-primary p-4">
             <h1 class="text-center mb-4">Welcome <%= dbUser.name %></h1>
@@ -27,4 +54,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

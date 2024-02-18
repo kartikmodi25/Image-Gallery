@@ -1,8 +1,8 @@
 <% layout('/layouts/boilerplate')%>
-    <div class="container-fluid bg-dark">
-        <div class="row">
-            <div class="col-md-6 bg-primary p-4">
-                <h1 class="text-dark">Login Page</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <h1 class="text-dark">Login Page</h1>
                 <form action="/login" method="POST" novalidate class="validated-form">
                     <div class="mb-3">
                         <label class="form-label text-dark" for="username">Username</label>
@@ -22,6 +22,6 @@
                     </div>
                     <button class="btn btn-success ">Login</button>
                 </form>
-            </div>
         </div>
     </div>
+</div>

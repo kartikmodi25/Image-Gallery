@@ -6,7 +6,7 @@ const UserData = require('../models/userData');
 
 router.get('/', catchAsync(async (req, res) => {
     const users = await User.find({});
-    res.render('admin/admin', { users })
+    res.render('protected/admin', { users })
 }))
 
 router.delete('/:id', catchAsync(async (req, res) => {

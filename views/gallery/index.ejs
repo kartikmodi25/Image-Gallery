@@ -1,15 +1,10 @@
 <% layout('/layouts/boilerplate')%>
 <div class="container">
     <div class="row">
-        <% for (let image of userImages) { %>
+        <% for (let image of images) { %>
             <div class="col-6 offset-3 d-flex flex-column align-items-center">
                 <img src="<%= image.imageURL %>" alt="" class="img-fluid standardized-image mb-3">
             </div>
         <% } %>
     </div>
 </div>
-
-
-
-
-    

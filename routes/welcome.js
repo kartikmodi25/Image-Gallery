@@ -6,7 +6,6 @@ const UserData = require('../models/userData');
 const { isLoggedIn } = require('../middleware')
 
 router.get('/:id', isLoggedIn, catchAsync(async (req, res) => {
-    console.log(isLoggedIn)
     const dbUser = await UserData.findById(req.params.id)
     res.render('userdata/welcome', { dbUser })
 }))

@@ -1,29 +1,29 @@
 <% layout('/layouts/boilerplate')%>
-    <div class="container-fluid bg-dark">
+    <div class="container">
         <div class="row">
-            <div class="col-md-6 bg-primary p-4">
+            <div class="col-md-6 offset-3">
                 <h1 class="text-dark">Register Page</h1>
                 <form action="/register" method="POST" novalidate class="validated-form">
                     <div class="mb-3">
                         <label class="form-label text-dark" for="email">Email</label>
-                        <input class="form-control" type="text" id="email" name="email"
-                            placeholder="abc@gmail.com" required>
+                        <input class="form-control" type="text" id="email" name="email" placeholder="abc@gmail.com"
+                            required>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label text-dark" for="username">Username</label>
-                        <input class="form-control" type="text" id="username" name="username"
-                            placeholder="username" required>
+                        <input class="form-control" type="text" id="username" name="username" placeholder="username"
+                            required>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label text-dark" for="password">Password</label>
-                        <input class="form-control" type="password" id="password" name="password"
-                            placeholder="password" required>
+                        <input class="form-control" type="password" id="password" name="password" placeholder="password"
+                            required>
                         <div class="valid-feedback">
                             Looks good!
                         </div>

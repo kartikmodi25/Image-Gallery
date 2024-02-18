@@ -1,6 +1,10 @@
 <% layout('/layouts/boilerplate')%>
-<form action="/welcome/<%= userData._id%>/gallery/add" method="POST" novalidate class="validated-form">
-    <label class="form-label text-white" for="url">Image URL</label>
-    <input class="form-control" type="text" id="url" name="ImageData[imageURL]"required>
-    <button class="btn btn-success mt-3">Add Image</button> 
-</form>
+<div class="container">
+    <div class="row">
+        <form action="/welcome/<%= userData._id%>/gallery/add" method="POST" novalidate class="validated-form">
+            <h1 class="text-dark">Enter image URL</h1>
+            <input class="form-control" type="text" id="url" name="ImageData[imageURL]" required>
+            <button class="btn btn-success mt-3">Add Image</button> 
+        </form>
+    </div>
+</div>

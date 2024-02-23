@@ -10,7 +10,6 @@ const UserData = new Schema({
     bio: {type: String, default: "N/A"},
     skill1: {type: String, default: "N/A"},
     skill2: {type: String, default: "N/A"},
-    skill3: {type: String, default: "N/A"},
     email: String,
     image: [
         {

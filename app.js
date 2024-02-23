@@ -69,6 +69,9 @@ app.get('/welcome', catchAsync(async (req, res) => {
     const images = await Image.find({});
     res.render('gallery/home', { images })
 }))
+app.all('*', (req, res, next) => {
+    next(new ExpressError("Page not found!", 404))
+})
 app.use((err, req, res, next) => {
     const { statusCode = 500 } = err;
     if (!err.message) err.message = "Oh No! Something Went Wrong!!!!"

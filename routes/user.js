@@ -5,36 +5,13 @@ const ImageData = require('../models/imageData');
 const UserData = require('../models/userData');
 const { isLoggedIn } = require('../middleware')
 
-router.get('/:id', isLoggedIn, catchAsync(async (req, res) => {
-    const dbUser = await UserData.findById(req.params.id)
-    res.render('userdata/profile', { dbUser })
-}))
-router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
-    const userData = await UserData.findById(req.params.id)
-    res.render('userdata/profileEdit', { userData });
-}))
-router.get('/:id/gallery', isLoggedIn, catchAsync(async (req, res) => {
-    const userData = await UserData.findById(req.params.id)
-    const userImages = await ImageData.find({ userId: req.params.id })
-    res.render('gallery/userImage', { userData, userImages });
-}))
-router.get('/:id/gallery/add', isLoggedIn, catchAsync(async (req, res) => {
-    const userData = await UserData.findById(req.params.id)
-    res.render('gallery/addImage', { userData });
-}))
-router.post('/:id/gallery/add', isLoggedIn, catchAsync(async (req, res) => {
-    const newImage = new ImageData(req.body.ImageData);
-    newImage.userId = req.params.id
-    const userData = await UserData.findById(req.params.id)
-    userData.image.push(newImage);
-    await userData.save()
-    await newImage.save();
-    res.redirect(`/welcome/${userData._id}/gallery`)
-}))
-router.put('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const userData = await UserData.findByIdAndUpdate(id, { ...req.body.userData });
-    res.redirect(`/welcome/${userData._id}`)
-}));
+const users = require('../controllers/users')
+
+router.get('/:id', isLoggedIn, catchAsync(users.getUser))
+router.get('/:id/edit', isLoggedIn, catchAsync(users.getEditUser))
+router.get('/:id/gallery', isLoggedIn, catchAsync(users.getGallery))
+router.get('/:id/gallery/add', isLoggedIn, catchAsync(users.getGalleryAdd))
+router.post('/:id/gallery/add', isLoggedIn, catchAsync(users.addGalleryImage))
+router.put('/:id/edit', isLoggedIn, catchAsync(users.editUser));
 
 module.exports = router

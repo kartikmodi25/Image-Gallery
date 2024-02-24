@@ -1,6 +1,7 @@
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }
+
 const mongoose = require('mongoose');
 const db = mongoose.connection;
 const express = require('express')
@@ -18,8 +19,10 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const Image = require('./models/imageData');
 const catchAsync = require('./utils/catchAsync')
+const MongoStore = require('connect-mongo');
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/login-db"
 
-mongoose.connect('mongodb://127.0.0.1:27017/login-db');
+mongoose.connect(dbUrl);
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
     console.log("Database connected");
@@ -32,7 +35,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')))
 
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret: 'thisshouldbeabettersecret!'
+    }
+});
+
 const sessionConfig = {
+    store,
+    name: 'session',
     secret: 'thisshouldbeabettersecret!',
     resave: false,
     saveUninitialized: true,
@@ -80,7 +93,7 @@ app.use((err, req, res, next) => {
     if (!err.message) err.message = "Oh No! Something Went Wrong!!!!"
     res.status(statusCode).render('error', { err })
 })
-
-app.listen(3000, () => {
-    console.log('Serving on port 3000')
+const port = process.env.PORT || 3000
+app.listen(port, () => {
+    console.log(`Serving on port ${port}`)
 })

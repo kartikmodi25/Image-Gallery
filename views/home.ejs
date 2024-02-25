@@ -1,11 +1,19 @@
 <% layout('/layouts/boilerplate')%>
     <div class="container">
         <div class="row">
-            <div class="col-md-6 offset-3">
-                <h5 class="card-title text-dark">Image-Library</h5>
-                <p class="card-text text-dark">Welcome to image library application. Please log in or register.</p>
-                <a href="/login" class="btn btn-success">Login</a>
-                <a href="/register" class="btn btn-secondary">Register</a>
+            <div class="col-md-6 offset-md-3">
+                <h2 class="text-center text-dark mt-5">Image-Library</h2>
+                <div class="text-center mb-5 text-dark">Welcome to image library application. Please log in or register.
+                </div>
+                <div class="card" style="background-color: #ebf2fa;">
+                    <div class="text-center">
+                        <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
+                            class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3" width="200px"
+                            alt="profile">
+                    </div>
+                    <div class="text-center"><a href="/login" class="btn btn-color px-5 mb-1 w-50">Login</a></div>
+                    <div class="text-center"><a href="/register" class="btn btn-color mb-4 px-5 w-50">Register</a></div>
+                </div>
             </div>
         </div>
     </div>

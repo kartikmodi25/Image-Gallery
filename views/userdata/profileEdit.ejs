@@ -1,12 +1,12 @@
 <% layout('/layouts/boilerplate')%>
     <div class="container">
         <div class="row">
-            <div class="col-6 offset-3">
+            <div class="col-md-6 offset-md-3 profile-info">
                 <h1 class="text-center">Edit Profile</h1>
                 <form action="/welcome/<%=userData._id%>/edit?_method=PUT" method="POST" novalidate
                     class="validated-form" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <label class="form-label" for="title">Username</label>
+                        <label class="form-label" for="title">Name</label>
                         <input class="form-control" type="text" id="title" name="userData[name]"
                             value="<%=userData.name %>" required>
                     </div>
@@ -17,13 +17,13 @@
                         <div class="form-file custom-file">
                             <input type="file" class="form-file-input" id="image" name="image">
                             <label class="form-file-label" for="image">
-                                <span class="form-file-text custom-file-label">Choose image(s)...</span>
+                                <span class="form-file-text custom-file-label">Choose image...</span>
                                 <span class="form-file-button">Browse</span>
                             </label>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="title">Profile Type</label>
+                        <label class="form-label" for="title">Profession</label>
                         <input class="form-control" type="text" id="title" name="userData[profileType]"
                             value="<%=userData.profileType %>" required>
                     </div>
@@ -33,20 +33,15 @@
                             value="<%=userData.bio %>" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="title">Skill1</label>
-                        <input class="form-control" type="text" id="title" name="userData[skill1]"
-                            value="<%=userData.skill1 %>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="title">Skill2</label>
-                        <input class="form-control" type="text" id="title" name="userData[skill2]"
-                            value="<%=userData.skill2 %>" required>
+                        <label class="form-label" for="title">Skills</label>
+                        <input class="form-control" type="text" id="title" name="userData[skills]"
+                            value="<%=userData.skills %>" required>
                     </div>
                     <div class="mb-3">
                         <button class="btn btn-success">Update Profile</button>
                     </div>
                 </form>
-                <a href="/welcome/<%= userData._id%>" class="text-white">Back To Profile</a>
+                <a href="/welcome/<%= userData._id%>" class="">Back To Profile</a>
             </div>
         </div>
     </div>

@@ -1,8 +1,13 @@
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
+
 const mongoose = require('mongoose');
 const User = require('../models/user');
 const UserData = require('../models/userData');
 const ImageData = require('../models/imageData')
-mongoose.connect('mongodb://localhost:27017/login-db', {});
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/login-db"
+mongoose.connect(String(dbUrl));
 
 const db = mongoose.connection;
 
@@ -15,6 +20,7 @@ const seedDB = async () => {
     await UserData.deleteMany({})
     await ImageData.deleteMany({})
     await User.deleteMany({})
+    
 }
 
 seedDB().then(() => {

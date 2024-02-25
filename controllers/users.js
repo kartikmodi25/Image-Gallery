@@ -37,7 +37,9 @@ module.exports.addGalleryImage = async (req, res) => {
     res.redirect(`/welcome/${userData._id}/gallery`)
 }
 module.exports.editUser = async (req, res) => {
-    req.body.userData.imageURL = req.file.path
+    if(req.file){
+        req.body.userData.imageURL = req.file.path
+    }
     const { id } = req.params;
     const userData = await UserData.findByIdAndUpdate(id, { ...req.body.userData });
     res.redirect(`/welcome/${userData._id}`)

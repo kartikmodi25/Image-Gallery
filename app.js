@@ -85,7 +85,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/admin', adminRoutes)
-app.use('/welcome/:id', welcomeRoutes)
+app.use('/welcome', welcomeRoutes)
 app.use('', authRoutes)
 
 app.all('*', (req, res, next) => {

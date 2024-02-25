@@ -7,18 +7,18 @@ const { storage } = require('../cloudinary')
 const upload = multer({ storage })
 const users = require('../controllers/users')
 
-router.get('/gallery', isLoggedIn, catchAsync(users.getGallery))
-router.get('/', isLoggedIn, catchAsync(users.getUser))
+router.get('/:id/gallery', isLoggedIn, catchAsync(users.getGallery))
+router.get('/:id', isLoggedIn, catchAsync(users.getUser))
 
-router.route('/gallery/add')
+router.route('/:id/gallery/add')
 .get(isLoggedIn, catchAsync(users.getGalleryAdd))
 .post(isLoggedIn, upload.array('image'), catchAsync(users.addGalleryImage))
 
-router.route('/edit')
+router.route('/:id/edit')
 .get(isLoggedIn, catchAsync(users.getEditUser))
 .put(isLoggedIn, upload.single('image'), catchAsync(users.editUser))
 
-router.route('/gallery/:imageId')
+router.route('/:id/gallery/:imageId')
 .get(isLoggedIn, isImageAuthor, catchAsync(users.getEditImage))
 .put(isLoggedIn, isImageAuthor, upload.single('image'), catchAsync(users.editImage))
 .delete(isLoggedIn, catchAsync(users.deleteImage))

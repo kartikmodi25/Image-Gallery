@@ -21,6 +21,7 @@ const Image = require('./models/imageData');
 const catchAsync = require('./utils/catchAsync')
 const MongoStore = require('connect-mongo');
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/login-db"
+const ExpressError = require('./utils/ExpressError')
 
 mongoose.connect(dbUrl);
 db.on("error", console.error.bind(console, "connection error:"));
@@ -79,6 +80,9 @@ app.use('/welcome', welcomeRoutes)
 app.use('', authRoutes)
 
 app.get('/', (req, res) => {
+    if(res.locals.currentUser){
+        return res.redirect(`/welcome/${res.locals.currentUser._id}`)
+    }
     res.render('home')
 })
 app.get('/welcome', catchAsync(async (req, res) => {

@@ -32,3 +32,19 @@ a {
 .profile-info h5 {
     color: #333;
 }
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    box-sizing: border-box;
+}
+
+.button-container form {
+    flex: 1;
+    width: 45%;
+}
+
+.button-container button {
+    width: 100%;
+}

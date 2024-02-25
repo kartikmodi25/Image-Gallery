@@ -44,3 +44,24 @@ module.exports.editUser = async (req, res) => {
     const userData = await UserData.findByIdAndUpdate(id, { ...req.body.userData });
     res.redirect(`/welcome/${userData._id}`)
 }
+module.exports.deleteImage = async (req, res) => {
+    const{id, imageId} = req.params
+    await UserData.findByIdAndUpdate(id, {$pull:{image:imageId}})
+    await ImageData.findByIdAndDelete(imageId)
+    req.flash('success', 'Successfully deleted Image!');
+    res.redirect(`/welcome/${id}/gallery`)
+}
+module.exports.editImage = async (req, res) => {
+    const{id, imageId} = req.params
+    if(!req.file){
+        return res.redirect(`/welcome/${id}/gallery`)
+    }
+    await ImageData.findByIdAndUpdate(imageId, {imageURL: req.file.path})
+    req.flash('success', 'Successfully updated Image!');
+    res.redirect(`/welcome/${id}/gallery`)
+}
+module.exports.getEditImage = async (req, res) => {
+    const{id, imageId} = req.params
+    res.render(`userData/editImage`, {id, imageId})
+}
+

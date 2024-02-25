@@ -20,7 +20,6 @@ const seedDB = async () => {
     await UserData.deleteMany({})
     await ImageData.deleteMany({})
     await User.deleteMany({})
-    
 }
 
 seedDB().then(() => {

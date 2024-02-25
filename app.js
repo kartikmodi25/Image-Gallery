@@ -1,7 +1,6 @@
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }
-
 const mongoose = require('mongoose');
 const db = mongoose.connection;
 const express = require('express')
@@ -22,6 +21,7 @@ const catchAsync = require('./utils/catchAsync')
 const MongoStore = require('connect-mongo');
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/login-db"
 const ExpressError = require('./utils/ExpressError')
+const port = process.env.PORT || 3000
 
 mongoose.connect(dbUrl);
 db.on("error", console.error.bind(console, "connection error:"));
@@ -40,14 +40,14 @@ const store = MongoStore.create({
     mongoUrl: dbUrl,
     touchAfter: 24 * 60 * 60,
     crypto: {
-        secret: 'thisshouldbeabettersecret!'
+        secret: process.env.SECRET
     }
 });
 
 const sessionConfig = {
     store,
     name: 'session',
-    secret: 'thisshouldbeabettersecret!',
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -74,10 +74,10 @@ app.use((req, res, next) => {
     next();
 })
 
-
-app.use('/admin', adminRoutes)
-app.use('/welcome', welcomeRoutes)
-app.use('', authRoutes)
+app.get('/welcome', catchAsync(async (req, res) => {
+    const images = await Image.find({});
+    res.render('gallery/home', { images })
+}))
 
 app.get('/', (req, res) => {
     if(res.locals.currentUser){
@@ -85,10 +85,11 @@ app.get('/', (req, res) => {
     }
     res.render('home')
 })
-app.get('/welcome', catchAsync(async (req, res) => {
-    const images = await Image.find({});
-    res.render('gallery/home', { images })
-}))
+
+app.use('/admin', adminRoutes)
+app.use('/welcome/:id', welcomeRoutes)
+app.use('', authRoutes)
+
 app.all('*', (req, res, next) => {
     next(new ExpressError("Page not found!", 404))
 })
@@ -97,7 +98,7 @@ app.use((err, req, res, next) => {
     if (!err.message) err.message = "Oh No! Something Went Wrong!!!!"
     res.status(statusCode).render('error', { err })
 })
-const port = process.env.PORT || 3000
+
 app.listen(port, () => {
     console.log(`Serving on port ${port}`)
 })

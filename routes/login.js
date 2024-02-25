@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const catchAsync = require('../utils/catchAsync')
-const UserData = require('../models/userData');
 const passport = require('passport');
 const auth = require('../controllers/auth')
 

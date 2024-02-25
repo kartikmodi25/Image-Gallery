@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const UserData = require('../models/userData');
+
 module.exports.registerUser = async (req, res) => {
     try {
         const { email, username, password } = req.body
@@ -32,6 +33,7 @@ module.exports.loginUser = async (req, res) => {
     const redirectUrl = res.locals.returnTo || `/welcome/${dbUser._id}`
     res.redirect(redirectUrl);
 }
+
 module.exports.logoutUser = (req, res, next) => {
     req.logout(function (err) {
         if (err) {
@@ -41,6 +43,7 @@ module.exports.logoutUser = (req, res, next) => {
         res.redirect('/');
     });
 }
+
 module.exports.renderLogin = (req, res) => {
     res.render('users/login')
 }

@@ -1,7 +1,5 @@
-const User = require('../models/user');
 const UserData = require('../models/userData');
 const ImageData = require('../models/imageData');
-
 
 module.exports.getUser = async (req, res) => {
     const dbUser = await UserData.findById(req.params.id)
@@ -36,6 +34,7 @@ module.exports.addGalleryImage = async (req, res) => {
     await userData.save()
     res.redirect(`/welcome/${userData._id}/gallery`)
 }
+
 module.exports.editUser = async (req, res) => {
     if(req.file){
         req.body.userData.imageURL = req.file.path
@@ -44,6 +43,7 @@ module.exports.editUser = async (req, res) => {
     const userData = await UserData.findByIdAndUpdate(id, { ...req.body.userData });
     res.redirect(`/welcome/${userData._id}`)
 }
+
 module.exports.deleteImage = async (req, res) => {
     const{id, imageId} = req.params
     await UserData.findByIdAndUpdate(id, {$pull:{image:imageId}})
@@ -51,6 +51,7 @@ module.exports.deleteImage = async (req, res) => {
     req.flash('success', 'Successfully deleted Image!');
     res.redirect(`/welcome/${id}/gallery`)
 }
+
 module.exports.editImage = async (req, res) => {
     const{id, imageId} = req.params
     if(!req.file){
@@ -60,6 +61,7 @@ module.exports.editImage = async (req, res) => {
     req.flash('success', 'Successfully updated Image!');
     res.redirect(`/welcome/${id}/gallery`)
 }
+
 module.exports.getEditImage = async (req, res) => {
     const{id, imageId} = req.params
     res.render(`userdata/editImage`, {id, imageId})

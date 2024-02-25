@@ -62,6 +62,6 @@ module.exports.editImage = async (req, res) => {
 }
 module.exports.getEditImage = async (req, res) => {
     const{id, imageId} = req.params
-    res.render(`userData/editImage`, {id, imageId})
+    res.render(`userdata/editImage`, {id, imageId})
 }
 

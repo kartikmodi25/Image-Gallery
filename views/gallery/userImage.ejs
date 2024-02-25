@@ -1,13 +1,18 @@
 <% layout('/layouts/boilerplate')%>
 <div class="container">
-    <div class="row">
-        <% for (let image of userImages) { %>
-            <div class="col-6 offset-3 d-flex flex-column align-items-center">
-                <img src="<%= image.imageURL %>" alt="" class="img-fluid standardized-image mb-3">
-            </div>
-        <% } %>
-    </div>
+    <% for (let i = 0; i < userImages.length; i += 2) { %>
+        <div class="row">
+            <% for (let j = i; j < i + 2 && j < userImages.length; j++) { %>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img src="<%= userImages[j].imageURL %>" class="card-img-top img-fluid" style="height: 350px; object-fit: cover;" alt="Image">
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    <% } %>
 </div>
+
 
 
 

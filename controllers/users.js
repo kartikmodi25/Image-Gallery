@@ -29,7 +29,7 @@ module.exports.addGalleryImage = async (req, res) => {
     const imageUrls = req.files.map(file => ({ imageURL: file.path, userId: req.params.id }));
     const userData = await UserData.findById(req.params.id)
     for(let img of imageUrls){
-        const newImage = new ImageData({userId: img.userId, imageURL: img.imageURL})
+        const newImage = new ImageData({userId: img.userId, imageURL: img.imageURL, username: userData.username})
         userData.image.push(newImage);
         await newImage.save()
     }

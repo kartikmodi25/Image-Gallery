@@ -45,9 +45,15 @@ module.exports.logoutUser = (req, res, next) => {
 }
 
 module.exports.renderLogin = (req, res) => {
+    if(res.locals.currentUser){
+        return res.redirect(`/welcome/${res.locals.currentUser._id}`)
+    }
     res.render('users/login')
 }
 
 module.exports.renderRegister = (req, res) => {
+    if(res.locals.currentUser){
+        return res.redirect(`/welcome/${res.locals.currentUser._id}`)
+    }
     res.render('users/register')
 }
